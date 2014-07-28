@@ -25,7 +25,18 @@ def tweet_formatting(tweet):
 
 #Step three: RT.
 
+'''
 public_tweets = api.home_timeline()
+print public_tweets
 for tweet in public_tweets:
     print tweet.text
     print tweet
+'''
+matching_tweets = api.search("fuck")
+print "number of returned tweets", len(matching_tweets)
+
+
+for tweet in matching_tweets:
+    print tweet
+    print "-------------------------------------\n\n\n"
+

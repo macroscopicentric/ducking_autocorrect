@@ -19,7 +19,6 @@ def letter_replace(word):
     return word
 
 def tweet_formatting(tweet):
-    # new_word_list += re.sub(r'fuck', letter_replace, word, flags=re.I)
     tweet = re.sub(r'(\bfuck\w*\b)', letter_replace, tweet, flags=re.I)
     return tweet
 

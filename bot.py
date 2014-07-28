@@ -28,3 +28,11 @@ def tweet_formatting(tweet):
     return ' '.join(map(word_replace, tweet.split(' ')))
 
 #Step three: RT.
+
+matching_tweets = api.search("fuck")
+print "number of returned tweets", len(matching_tweets)
+
+
+for tweet in matching_tweets:
+    print tweet
+    print "-------------------------------------\n\n\n"

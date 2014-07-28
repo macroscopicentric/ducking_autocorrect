@@ -45,3 +45,7 @@ for tweet in matching_tweets:
 
 
 #Step three: RT.
+def retweet(tweet):
+    #Change from return to actual tweepy retweet method when we're done.
+    return 'rt @' + tweet.screen_name + tweet_formatting(tweet.text)
+

@@ -19,7 +19,6 @@ def letter_replace(word):
     return word
 
 def tweet_formatting(tweet):
-    # new_word_list += re.sub(r'fuck', letter_replace, word, flags=re.I)
     tweet = re.sub(r'(\bfuck\w*\b)', letter_replace, tweet, flags=re.I)
     return tweet
 
@@ -35,7 +34,7 @@ def print_tweet(text):
             
 #Step three: RT.
 def retweet(tweet):
-    retweet_string = 'RT @' + tweet.author.screen_name + tweet_formatting(tweet.text)
+    retweet_string = 'RT @' + tweet.author.screen_name + ' ' + tweet_formatting(tweet.text)
     api.update_status(retweet_string)
     print_tweet(retweet_string)
 

@@ -17,6 +17,10 @@ def word_replace(word):
         word_remainder = word.split('fuck')
         word = 'duck' + word_remainder[1]
         return word
+    elif 'FUCK' in word:
+        word_remainder = word.split('fuck')
+        word = 'duck' + word_remainder[1]
+        return word
     else:
         return word
 
@@ -25,13 +29,6 @@ def tweet_formatting(tweet):
 
 #Step three: RT.
 
-'''
-public_tweets = api.home_timeline()
-print public_tweets
-for tweet in public_tweets:
-    print tweet.text
-    print tweet
-'''
 matching_tweets = api.search("fuck")
 print "number of returned tweets", len(matching_tweets)
 
@@ -41,4 +38,3 @@ for tweet in matching_tweets:
     except:
         print "strange characters in tweet preventing the text from printing"
     print "-------------------------------------\n\n\n"
-

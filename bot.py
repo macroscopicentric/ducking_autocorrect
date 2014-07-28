@@ -7,6 +7,21 @@ api = tweepy.API(auth)
 
 #Step one: search Twitter for relevant tweets.
 
+matching_tweets = api.search("fuck")
+print "number of returned tweets", len(matching_tweets)
+
+print matching_tweets[0].user
+
+for tweet in matching_tweets:
+    try:
+       print "original tweet: " + tweet.text
+       print "censored tweet: " +  tweet_formatting(tweet.text)
+    except:
+        print "strange characters in tweet preventing the text from printing"
+    print "-------------------------------------\n\n\n"
+
+
+
 #Step two: replace "fuck" with "duck."
 def word_replace(word):
     if 'Fuck' in word:
@@ -28,13 +43,3 @@ def tweet_formatting(tweet):
     return ' '.join(map(word_replace, tweet.split(' ')))
 
 #Step three: RT.
-
-matching_tweets = api.search("fuck")
-print "number of returned tweets", len(matching_tweets)
-
-for tweet in matching_tweets:
-    try:
-        print tweet.text
-    except:
-        print "strange characters in tweet preventing the text from printing"
-    print "-------------------------------------\n\n\n"

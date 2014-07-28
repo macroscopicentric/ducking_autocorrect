@@ -34,18 +34,18 @@ def print_tweet(text):
             
 #Step three: RT.
 def retweet(tweet):
-    try:
-        retweet_string = 'RT @' + tweet.author.screen_name + ' ' + tweet_formatting(tweet.text)
-        api.update_status(retweet_string)
-        print_tweet(retweet_string)
-    except tweepy.error.TweepError:
-        pass
+    retweet_string = 'RT @' + tweet.author.screen_name + ' ' + tweet_formatting(tweet.text)
+    api.update_status(retweet_string)
+    print_tweet(retweet_string)
 
 def main():
-    matching_tweets = api.search("fuck")
-    i = random.randint(0,len(matching_tweets))
-    retweet(matching_tweets[i])
-    time.sleep(600)
+    try:
+        matching_tweets = api.search("fuck")
+        i = random.randint(0,len(matching_tweets))
+        retweet(matching_tweets[i])
+        time.sleep(600)
+    except tweepy.error.TweepError:
+        pass
 
 if __name__ == '__main__':
     while True:

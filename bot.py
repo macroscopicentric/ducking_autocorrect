@@ -1,5 +1,6 @@
 import credentials as cred
 import tweepy
+import re
 
 auth = tweepy.OAuthHandler(cred.consumer_key, cred.consumer_secret)
 auth.set_access_token(cred.access_token_key, cred.access_token_secret)
@@ -20,27 +21,28 @@ for tweet in matching_tweets:
         print "strange characters in tweet preventing the text from printing"
     print "-------------------------------------\n\n\n"
 
-
-
 #Step two: replace "fuck" with "duck."
-def word_replace(word):
-    if 'Fuck' in word:
-        word_remainder = word.split('Fuck')
-        word = 'Duck' + word_remainder[1]
-        return word
-    elif 'fuck' in word:
-        word_remainder = word.split('fuck')
-        word = 'duck' + word_remainder[1]
-        return word
-    elif 'FUCK' in word:
-        word_remainder = word.split('fuck')
-        word = 'duck' + word_remainder[1]
-        return word
+
+test1 = 'I fucking hate autocorrect.'
+test2 = 'Fuck you.'
+test3 = 'FUcK YOU'
+
+def letter_replace(word):
+    word = word.groups()[0]
+    if word[0].isupper():
+        word = 'D' + word[1:]
     else:
-        return word
+        word = 'd' + word[1:]
+    return word
 
 def tweet_formatting(tweet):
-    return ' '.join(map(word_replace, tweet.split(' ')))
+    # new_word_list += re.sub(r'fuck', letter_replace, word, flags=re.I)
+    tweet = re.sub(r'(\bfuck\w*\b)', letter_replace, tweet, flags=re.I)
+    return tweet
+
+print tweet_formatting(test1)
+print tweet_formatting(test2)
+print tweet_formatting(test3)
 
 #Step three: RT.
 def retweet(tweet):

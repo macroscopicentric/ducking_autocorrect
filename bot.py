@@ -28,24 +28,30 @@ def tweet_formatting(tweet):
 
 #Step two: search Twitter for relevant tweets.
 
-# make a method to check if the body of the tweet contains query string
-# make a method to check if the body of the tweet can be printed
-
 matching_tweets = api.search("fuck")
 
+def print_tweet(text):
+    return_string = ""
+    for i in text:
+        try:
+            i.decode('ascii')
+            return_string += i
+        except:
+            return_string += "_"
+    print return_string 
+            
 for tweet in matching_tweets:
-    try:
-       print "original tweet: " + tweet.text
-       print "censored tweet: " +  tweet_formatting(tweet.text)
-    except:
-        print "strange characters in tweet preventing the text from printing"
-    print "-------------------------------------\n\n\n"
-
-
-
-
+    print_tweet("original tweet: " + tweet.text)
+    print_tweet( "censored tweet: " +  tweet_formatting(tweet.text))
+    print_tweet( 'RT @' + tweet.author.screen_name + tweet_formatting(tweet.text))
+    print "\n\n"
+     
 #Step three: RT.
 def retweet(tweet):
     #Change from return to actual tweepy retweet method when we're done.
-    return 'rt @' + tweet.screen_name + tweet_formatting(tweet.text)
+    return 'rt @' + tweet.author.screen_name + tweet_formatting(tweet.text)
+
+print retweet(matching_tweets[0])
+
+
 

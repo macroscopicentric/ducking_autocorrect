@@ -2,7 +2,7 @@ import credentials as cred
 import tweepy
 
 auth = tweepy.OAuthHandler(cred.consumer_key, cred.consumer_secret)
-auth.set_access_token(cred.access_key, cred.access_secret)
+auth.set_access_token(cred.access_token_key, cred.access_token_secret)
 api = tweepy.API(auth)
 
 #Step one: search Twitter for relevant tweets.

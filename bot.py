@@ -1,12 +1,11 @@
-import twitterapi as ta
+import credentials as cred
+import tweepy
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_key, access_secret)
+auth = tweepy.OAuthHandler(cred.consumer_key, cred.consumer_secret)
+auth.set_access_token(cred.access_key, cred.access_secret)
 api = tweepy.API(auth)
 
 #Step one: search Twitter for relevant tweets.
-test_string1 = 'I fucking hate autocorrect.'
-test_string2 = 'Fuck that.'
 
 #Step two: replace "fuck" with "duck."
 def word_replace(word):
@@ -24,7 +23,9 @@ def word_replace(word):
 def tweet_formatting(tweet):
     return ' '.join(map(word_replace, tweet.split(' ')))
 
-print tweet_formatting(test_string1)
-print tweet_formatting(test_string2)
-
 #Step three: RT.
+
+public_tweets = api.home_timeline()
+for tweet in public_tweets:
+    print tweet.text
+    print tweet

@@ -1,4 +1,4 @@
-twitterapi.py
+credentials.py
 *.pyc
 
 # -*- mode: gitignore; -*-

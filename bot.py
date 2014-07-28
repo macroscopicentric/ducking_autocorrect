@@ -35,14 +35,9 @@ def letter_replace(word):
         word = 'd' + word[1:]
     return word
 
-def tweet_formatting(tweet):
-    # new_word_list += re.sub(r'fuck', letter_replace, word, flags=re.I)
-    tweet = re.sub(r'(\bfuck\w*\b)', letter_replace, tweet, flags=re.I)
+def tweet_formatting(tweet_text):
+    tweet = re.sub(r'(\bfuck\w*\b)', letter_replace, tweet_text, flags=re.I)
     return tweet
-
-print tweet_formatting(test1)
-print tweet_formatting(test2)
-print tweet_formatting(test3)
 
 #Step three: RT.
 def retweet(tweet):

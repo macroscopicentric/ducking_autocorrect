@@ -35,8 +35,10 @@ for tweet in public_tweets:
 matching_tweets = api.search("fuck")
 print "number of returned tweets", len(matching_tweets)
 
-
 for tweet in matching_tweets:
-    print tweet
+    try:
+        print tweet.text
+    except:
+        print "strange characters in tweet preventing the text from printing"
     print "-------------------------------------\n\n\n"
 

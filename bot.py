@@ -41,7 +41,7 @@ def retweet(tweet):
 def main():
     try:
         matching_tweets = api.search("fuck")
-        i = random.randint(0,len(matching_tweets))
+        i = random.randrange(0,len(matching_tweets))
         retweet(matching_tweets[i])
         time.sleep(600)
     except tweepy.error.TweepError:

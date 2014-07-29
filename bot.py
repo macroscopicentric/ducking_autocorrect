@@ -19,9 +19,9 @@ def letter_replace(word):
     return word
 
 def tweet_formatting(tweet):
-    tweet = re.sub(r'(\bfuck\w*\b)', letter_replace, tweet, flags=re.I)
-    return tweet
+    return re.sub(r'(\bfuck\w*\b)', letter_replace, tweet, flags=re.I)
 
+#Prints to console for debugging purposes. Formats to avoid emojis.
 def print_tweet(text):
     return_string = ""
     for i in text:
@@ -32,7 +32,6 @@ def print_tweet(text):
             return_string += "_"
     print return_string 
             
-#Step three: RT.
 def retweet(tweet):
     retweet_string = 'RT @' + tweet.author.screen_name + ' ' + tweet_formatting(tweet.text)
     api.update_status(retweet_string)

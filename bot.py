@@ -31,17 +31,20 @@ def print_tweet(text):
         except:
             return_string += "_"
     print return_string 
-            
-def retweet(tweet):
-    retweet_string = 'RT @' + tweet.author.screen_name + ' ' + tweet_formatting(tweet.text)
-    api.update_status(retweet_string)
-    print_tweet(retweet_string)
+
 
 def main():
     try:
         matching_tweets = api.search("fuck")
-        i = random.randrange(0,len(matching_tweets))
-        retweet(matching_tweets[i])
+        tweet = matching_tweets[random.randrange(0,len(matching_tweets))]
+        string_to_retweet = ('RT @' + tweet.author.screen_name + ' ' +
+            tweet_formatting(tweet.text))
+        while ('fuck' not in tweet.text.lower() or
+            re.search(r'pussy|fag|porn|nsfw|nigga|https?://', string_to_retweet,
+                flags=re.I) or 'media' in tweet.__dict__):
+            main()
+        print_tweet(string_to_retweet)
+        api.update_status(string_to_retweet)
         time.sleep(600)
     except tweepy.error.TweepError:
         pass

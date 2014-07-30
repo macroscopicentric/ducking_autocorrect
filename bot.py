@@ -1,4 +1,5 @@
 import credentials as cred
+import filters
 import tweepy
 import sys
 import re
@@ -42,8 +43,11 @@ def main():
         #SFW filter: avoids some keywords, tweets with links, and tweets with media (ie, photos or videos) attached.
         #First condition ensures that 'fuck' isn't just in a username.
         while ('fuck' not in tweet.text.lower() or
-            re.search(r'pussy|fag|porn|nsfw|nigga|https?://', string_to_retweet,
-                flags=re.I) or 'media' in tweet.__dict__):
+            re.search(filters.swears, string_to_retweet,
+                flags=re.I) or
+            re.search(filters.politics, string_to_retweet,
+                flags=re.I) or
+            'media' in tweet.__dict__):
             main()
         print_tweet(string_to_retweet)
         api.update_status(string_to_retweet)

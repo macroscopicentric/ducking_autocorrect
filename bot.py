@@ -39,6 +39,8 @@ def main():
         tweet = matching_tweets[random.randrange(0,len(matching_tweets))]
         string_to_retweet = ('RT @' + tweet.author.screen_name + ' ' +
             tweet_formatting(tweet.text))
+        #SFW filter: avoids some keywords, tweets with links, and tweets with media (ie, photos or videos) attached.
+        #First condition ensures that 'fuck' isn't just in a username.
         while ('fuck' not in tweet.text.lower() or
             re.search(r'pussy|fag|porn|nsfw|nigga|https?://', string_to_retweet,
                 flags=re.I) or 'media' in tweet.__dict__):

@@ -1,5 +1,4 @@
 credentials
-filters.py
 *.pyc
 
 # -*- mode: gitignore; -*-

@@ -51,7 +51,7 @@ def main():
             main()
         print_tweet(string_to_retweet)
         api.update_status(string_to_retweet)
-        time.sleep(600)
+        time.sleep(3600)
     except tweepy.error.TweepError:
         pass
 

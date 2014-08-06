@@ -33,29 +33,32 @@ def print_tweet(text):
             return_string += "_"
     print return_string 
 
+def is_sfw(tweet):
+    if ('fuck' not in tweet.text.lower() or
+            re.search(filters.swears, string_to_retweet, flags=re.I) or
+            re.search(filters.politics, string_to_retweet, flags=re.I) or
+            'media' in tweet.__dict__):
+        return False
+    else:
+        return True
 
-def main():
+def start():
     try:
         matching_tweets = api.search("fuck")
+        #TODO: iterate through returned tweets, instead of selecting one randomly.
         tweet = matching_tweets[random.randrange(0,len(matching_tweets))]
         string_to_retweet = ('RT @' + tweet.author.screen_name + ' ' +
             tweet_formatting(tweet.text))
         #SFW filter: avoids some keywords, tweets with links, and tweets with media (ie, photos or videos) attached.
         #First condition ensures that 'fuck' isn't just in a username.
-        while ('fuck' not in tweet.text.lower() or
-            re.search(filters.swears, string_to_retweet,
-                flags=re.I) or
-            re.search(filters.politics, string_to_retweet,
-                flags=re.I) or
-            'media' in tweet.__dict__):
-            main()
-        print_tweet(string_to_retweet)
-        api.update_status(string_to_retweet)
-        time.sleep(3600)
+        if is_sfw(string_to_retweet):
+            print_tweet(string_to_retweet)
+            api.update_status(string_to_retweet)
+            time.sleep(3600)
     except tweepy.error.TweepError:
         pass
 
 if __name__ == '__main__':
     while True:
-        main()
+        start()
 

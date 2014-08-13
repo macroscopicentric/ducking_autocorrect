@@ -35,8 +35,8 @@ def print_tweet(text):
 
 def is_sfw(tweet):
     if ('fuck' not in tweet.text.lower() or
-            re.search(filters.swears, string_to_retweet, flags=re.I) or
-            re.search(filters.politics, string_to_retweet, flags=re.I) or
+            re.search(filters.swears, tweet.text, flags=re.I) or
+            re.search(filters.politics, tweet.text, flags=re.I) or
             'media' in tweet.__dict__):
         return False
     else:
@@ -51,7 +51,7 @@ def start():
             tweet_formatting(tweet.text))
         #SFW filter: avoids some keywords, tweets with links, and tweets with media (ie, photos or videos) attached.
         #First condition ensures that 'fuck' isn't just in a username.
-        if is_sfw(string_to_retweet):
+        if is_sfw(tweet):
             print_tweet(string_to_retweet)
             api.update_status(string_to_retweet)
             time.sleep(3600)
